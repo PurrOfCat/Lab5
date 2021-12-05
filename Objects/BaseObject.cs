@@ -31,6 +31,7 @@ namespace Lab5.Objects
         }
 
         public virtual void Render(Graphics g) {}
+
         public virtual GraphicsPath GetGraphicsPath()
         {
             return new GraphicsPath();

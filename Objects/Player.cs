@@ -9,12 +9,14 @@ namespace Lab5.Objects
     class Player : BaseObject
     {
         public Action<Marker> OnMarkerOverlap;
+        public Action<MyEllipse> OnEllipseOverlap;
         public float vX, vY;
+
         public Player(float x, float y, float angle) : base(x, y, angle) {}
 
         public override void Render(Graphics g)
         {
-            g.FillEllipse(new SolidBrush(Color.DeepSkyBlue), -15, -15, 30, 30);
+            g.FillEllipse(new SolidBrush(Color.MediumPurple), -15, -15, 30, 30);
             g.DrawEllipse(new Pen(Color.Black, 2), -15, -15, 30, 30);
             g.DrawLine(new Pen(Color.Black, 2), 0, 0, 25, 0);
         }
@@ -33,6 +35,11 @@ namespace Lab5.Objects
             if (obj is Marker)
             {
                 OnMarkerOverlap(obj as Marker);
+            }
+
+            if (obj is MyEllipse)
+            {
+                OnEllipseOverlap(obj as MyEllipse);
             }
         }
     }

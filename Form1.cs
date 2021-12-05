@@ -16,11 +16,14 @@ namespace Lab5
         List<BaseObject> objects = new List<BaseObject>();
         Player player;
         Marker marker;
+        MyEllipse ellipse;
+        Random rnd = new Random();
         public Form1()
         {
             InitializeComponent();
 
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
+
             player.OnOverlap += (p, obj) =>
             {
                 txtLog.Text = $"[{DateTime.Now:HH:mm:ss:ff}] Игрок пересекся с {obj}\n" + txtLog.Text;
@@ -32,11 +35,15 @@ namespace Lab5
                 marker = null;
             };
 
-            marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
+            player.OnEllipseOverlap += (r) =>
+            {
+                objects.Remove(r);
+                r.X = rnd.Next(1, pbMain.Width - 1);
+                r.Y = rnd.Next(1, pbMain.Height - 1);
+            };
 
-            objects.Add(new MyRectangle(50, 50, 0));
-            objects.Add(new MyRectangle(100, 100, 45));
-            objects.Add(marker);
+            ellipse = new MyEllipse(100, pbMain.Height / 2, 0);
+            objects.Add(ellipse);
             objects.Add(player);            
         }
 
@@ -69,7 +76,6 @@ namespace Lab5
             {
                 float dx = marker.X - player.X;
                 float dy = marker.Y - player.Y;
-
                 float length = MathF.Sqrt(dx * dx + dy * dy);
                 dx /= length;
                 dy /= length;
@@ -93,15 +99,17 @@ namespace Lab5
         }
 
         private void pbMain_MouseClick(object sender, MouseEventArgs e)
-        {
+        {            
             if (marker == null)
             {
                 marker = new Marker(0, 0, 0);
                 objects.Add(marker); 
             }
-
+                
             marker.X = e.X;
             marker.Y = e.Y;
+
+            objects.Add(marker);
         }
     }
 }
