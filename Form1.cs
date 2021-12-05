@@ -16,18 +16,26 @@ namespace Lab5
         List<BaseObject> objects = new List<BaseObject>();
         Player player;
         Marker marker;
-        MyEllipse ellipse;
+        MyEllipse ellipse1;
+        MyEllipse ellipse2;
+
         public Form1()
         {
             InitializeComponent();
 
-            player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);            
-            ellipse = new MyEllipse(0,0,0);
-            ellipse.GetRandomPoint(pbMain.Width, pbMain.Height);
+            player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);     
+            
+            ellipse1 = new MyEllipse(0, 0, 0);
+            ellipse1.GetRandomPoint(pbMain.Width, pbMain.Height);
+            ellipse1.SetRandomCountdown();
+
+            ellipse2 = new MyEllipse(0, 0, 0);
+            ellipse2.GetRandomPoint(pbMain.Width, pbMain.Height);
+            ellipse2.SetRandomCountdown();
 
             player.OnOverlap += (p, obj) =>
             {
-                txtLog.Text = $"[{DateTime.Now:HH:mm:ss:ff}] Игрок пересекся с {obj}\n" + txtLog.Text;
+                txtLog.Text = $"[{DateTime.Now:HH:mm:ss}] Игрок пересекся с {obj}\n" + txtLog.Text;
             };
 
             player.OnMarkerOverlap += (m) =>
@@ -38,12 +46,26 @@ namespace Lab5
 
             player.OnEllipseOverlap += (r) =>
             {
-                player.score++;
+                player.Score++;
                 r.GetRandomPoint(pbMain.Width, pbMain.Height);
+                r.SetRandomCountdown();
             };
 
-            objects.Add(ellipse);
-            objects.Add(player);            
+            ellipse1.ZeroCountdown += (r) =>
+            {
+                r.GetRandomPoint(pbMain.Width, pbMain.Height);
+                r.SetRandomCountdown();
+            };
+
+            ellipse2.ZeroCountdown += (r) =>
+            {
+                r.GetRandomPoint(pbMain.Width, pbMain.Height);
+                r.SetRandomCountdown();
+            };
+
+            objects.Add(ellipse1);
+            objects.Add(ellipse2);
+            objects.Add(player);
         }
 
         private void pbMain_Paint(object sender, PaintEventArgs e)
@@ -52,7 +74,7 @@ namespace Lab5
             g.Clear(Color.White);
 
             updatePlayer();
-
+            
             foreach (var obj in objects.ToList())
             {
                 if (obj != player && player.Overlaps(obj, g))
@@ -60,14 +82,14 @@ namespace Lab5
                     player.Overlap(obj);
                     obj.Overlap(player);
                 }
-                lblScore.Text = $"{player.score}";
+                lblScore.Text = $"{player.Score}";
             }
 
             foreach (var obj in objects)
             {
-                g.Transform = obj.GetTransform();
+                g.Transform = obj.GetTransform();                
                 obj.Render(g);
-            }
+            }            
         }
 
         private void updatePlayer()
@@ -94,7 +116,7 @@ namespace Lab5
         }
 
         private void timer1_Tick(object sender, EventArgs e)
-        {        
+        {
             pbMain.Invalidate();
         }
 
@@ -107,9 +129,7 @@ namespace Lab5
             }
                 
             marker.X = e.X;
-            marker.Y = e.Y;
-
-            objects.Add(marker);
+            marker.Y = e.Y;            
         }
     }
 }

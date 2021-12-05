@@ -43,7 +43,7 @@ namespace Lab5
             // 
             this.pbMain.Location = new System.Drawing.Point(12, 30);
             this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(497, 362);
+            this.pbMain.Size = new System.Drawing.Size(388, 244);
             this.pbMain.TabIndex = 0;
             this.pbMain.TabStop = false;
             this.pbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pbMain_Paint);
@@ -57,9 +57,9 @@ namespace Lab5
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(519, 12);
+            this.txtLog.Location = new System.Drawing.Point(413, 9);
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(215, 380);
+            this.txtLog.Size = new System.Drawing.Size(195, 265);
             this.txtLog.TabIndex = 1;
             this.txtLog.Text = "";
             // 
@@ -78,7 +78,7 @@ namespace Lab5
             // 
             this.lblScore.AutoSize = true;
             this.lblScore.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblScore.Location = new System.Drawing.Point(483, 9);
+            this.lblScore.Location = new System.Drawing.Point(383, 9);
             this.lblScore.Name = "lblScore";
             this.lblScore.Size = new System.Drawing.Size(17, 19);
             this.lblScore.TabIndex = 3;
@@ -88,7 +88,7 @@ namespace Lab5
             // 
             this.labelScore.AutoSize = true;
             this.labelScore.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelScore.Location = new System.Drawing.Point(435, 8);
+            this.labelScore.Location = new System.Drawing.Point(335, 8);
             this.labelScore.Name = "labelScore";
             this.labelScore.Size = new System.Drawing.Size(49, 19);
             this.labelScore.TabIndex = 4;
@@ -98,7 +98,7 @@ namespace Lab5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 404);
+            this.ClientSize = new System.Drawing.Size(620, 292);
             this.Controls.Add(this.labelScore);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.lblRules);
