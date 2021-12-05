@@ -17,12 +17,13 @@ namespace Lab5
         Player player;
         Marker marker;
         MyEllipse ellipse;
-        Random rnd = new Random();
         public Form1()
         {
             InitializeComponent();
 
-            player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
+            player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);            
+            ellipse = new MyEllipse(0,0,0);
+            ellipse.GetRandomPoint(pbMain.Width, pbMain.Height);
 
             player.OnOverlap += (p, obj) =>
             {
@@ -38,12 +39,9 @@ namespace Lab5
             player.OnEllipseOverlap += (r) =>
             {
                 player.score++;
-                objects.Remove(r);
-                r.X = rnd.Next(1, pbMain.Width - 1);
-                r.Y = rnd.Next(1, pbMain.Height - 1);
+                r.GetRandomPoint(pbMain.Width, pbMain.Height);
             };
 
-            ellipse = new MyEllipse(100, pbMain.Height / 2, 0);
             objects.Add(ellipse);
             objects.Add(player);            
         }

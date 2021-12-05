@@ -11,6 +11,7 @@ namespace Lab5.Objects
         public float X;
         public float Y;
         public float Angle;
+        public Random rnd = new Random();
 
         public Action<BaseObject, BaseObject> OnOverlap;
 
@@ -56,6 +57,11 @@ namespace Lab5.Objects
             {
                 this.OnOverlap(this, obj);
             }
+        }
+        public virtual void GetRandomPoint(int max_x, int max_y)
+        {
+            X = rnd.Next(30, max_x - 30);
+            Y = rnd.Next(30, max_y - 30);
         }
     }
 }
