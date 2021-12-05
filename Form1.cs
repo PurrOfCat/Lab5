@@ -37,6 +37,7 @@ namespace Lab5
 
             player.OnEllipseOverlap += (r) =>
             {
+                player.score++;
                 objects.Remove(r);
                 r.X = rnd.Next(1, pbMain.Width - 1);
                 r.Y = rnd.Next(1, pbMain.Height - 1);
@@ -61,6 +62,7 @@ namespace Lab5
                     player.Overlap(obj);
                     obj.Overlap(player);
                 }
+                lblScore.Text = $"{player.score}";
             }
 
             foreach (var obj in objects)

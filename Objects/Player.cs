@@ -11,6 +11,7 @@ namespace Lab5.Objects
         public Action<Marker> OnMarkerOverlap;
         public Action<MyEllipse> OnEllipseOverlap;
         public float vX, vY;
+        public int score = 0;
 
         public Player(float x, float y, float angle) : base(x, y, angle) {}
 
